@@ -1,0 +1,116 @@
+---
+title: "summeRworkshop exercises"
+date: "25/7/2019"
+author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: no
+    highlight: github
+---
+
+<div style="text-align:center">
+  <img src="./bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
+
+## Exercise 1
+Create vectors $x$ and $y$, where $x$ is a sequence of integers between 4 and 
+25, 
+and $y$ is a sequence of the same length as $x$ from -5 to 2.
+
+* Calculate the second powers of elements of $y$.
+* Sum $x$ and $y$.
+* Divide $x$ by $y$.
+* Calculate the sum of the differences between $x$ and $y$.
+* Select the elements of $x$, where the elements on the same position in $y$
+  are positive.
+* Calculate the scalar product of $x$ and $y$.
+
+
+## Exercise 2
+Create a data frame that includes at least 5 rows (observations). Additionally,
+the data frame should include at least one of each of the following variables:
+
+* integer
+* numeric
+* date
+* character
+* nominal factor
+* ordinal factor
+
+
+## Exercise 3
+Use the normal random number generator (tip: use seed) to create:
+
+* 4x4 matrix $A$,
+* 2x5 matrix $B$,
+* 5x4 matrix $C$.
+
+Calculate:
+
+* the mean of values in $A$,
+* the variance of values in $A$,
+* the max value in all of the matrices,
+* the sum of $A$ and its transpose,
+* the element-wise product of $A$ and its transpose,
+* the scalar product of $B$ and $C$,
+* the determinant of $B^TB$.
+
+
+
+## Exercise 4
+Write a function that takes vector $x$ and iterates over its values.
+At each iteration the function prints whether $x$ is greater than 0, 
+lower than zero, or equal to zero. (see `?print`). Use the function
+by taking $x$---30 random numbers from a normal distribution with 
+mean 3 and variance 4.
+
+
+## Exercise 5 (Fibonacci)
+Write a function with parameter _n_, which outputs the first n Fibonacci
+numbers.  The n-th Fibonacci number is calculated as $F_n = F_{n-1} + F_{n-2}$,
+$F_0 = 0$, and $F_1 = 1$.
+
+
+## Exercise 6 (Machine learning and data science jobs)
+Read the DSjobs.csv data
+(source: https://www.kaggle.com/kaggle/kaggle-survey-2017)
+and save it as a tibble. The observations in the
+data set are people who work in machine learning and data science jobs around
+the world, their information (nationality, gender, job title,...), and
+their compensation (wages). The data is based on a survey done by Kaggle.
+
+Do the following tasks on the original data set:
+
+* remove all columns starting with "Time",
+* remove all rows where the the employment status is not full-time,
+* adjust the compensation by the exchange rate (the compensation in the
+  data set is currently in the currency of the country of the person),
+* remove rows where the adjusted compensation is equal to NA (see `?is.na` ),
+* calculate the mean and median adjusted compensation for each job title
+  (Why do these statistics differ so much?) and arrange descending by the
+  median,
+* do all of the above using the pipe.
+
+
+## Exercise 7 (NBA players)
+Read the plyer_wage.csv data
+(source: https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary)
+and save it as a tibble. The observations in the
+data set are NBA players, their information (statistics, nationality,...), and
+their wages. For a glossary of NBA terms, see 
+https://www.basketball-reference.com/about/glossary.html.
+
+Do the following tasks on the original data set:
+
+* create a tibble with only Slovenian players,
+* create a tibble with all USA players who play for Golden State Warriors (GWS),
+* arrange Players first by age, then by salary, both descending
+* create a tibble with columns name, country, draft number, age, and team,
+* add a new variable to the data frame, minutes per game (MPG),
+* create a tibble with average salary per team descending,
+* create a tibble with average salary per country descending,
+* create a 
+  tibble with players from the USA, summarise the salary per minutes
+  played, grouped by team (use the pipe!).

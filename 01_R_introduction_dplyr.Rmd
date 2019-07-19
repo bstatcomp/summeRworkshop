@@ -1,0 +1,871 @@
+---
+title: "R introduction and dplyr"
+author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+date: "25/7/2019"
+output:
+    prettydoc::html_pretty:
+      highlight: github
+      theme: architect
+      toc: true
+      toc_depth: 2
+---
+<div style="text-align:center">
+  <img src="./bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R and Rstudio
+R (https://www.r-project.org/) is a free open-source software for statistical 
+computing.
+The basic interface to R is via console, which is quite rigid. RStudio 
+(https://www.rstudio.com) provides
+us with a better user interface and additional functionalities 
+(R notebooks, RMarkdown,...). 
+
+Usually the page in RStudio is separated into four parts.
+Upper left part is used for scripts. These are R files (or similar) which
+include our code and represent the main building blocks of our programs.
+Lower left part is the console, equivalent to the basic console interface of
+R. Upper right part is dedicated to the environment and history. Lower
+right part shows our workspace, plots, packages, and help.
+
+To create a new script, go to File -> New File -> R Script. To run the code,
+highlight the desired part of the code and press Ctrl + Enter. Alternatively,
+you can run the code by clicking the run icon in the top-right corner of
+the script.
+
+To specify the working directory, use `setwd()` function, where you
+provide the working directory in parentheses. For example to set the
+working directory to C:/Author you would call
+
+```{r, eval=FALSE}
+setwd("C:/Author")
+```
+
+Note that R recognizes either a slash or double backslash in the path, 
+but it does not recognize a single backslash, which is the default if you
+copy the path on a Slovenian computer.
+
+```{r, eval=FALSE}
+setwd("C:/Author") # OK
+setwd("C:\\Author") # OK
+setwd("C:\Author") # Not OK.
+```
+
+# Variables
+
+Variables are the main data type of every program. In R, we define the values
+of variables with the syntax `<-`. We do not need to initialize the type of
+the variables, as R predicts it. We denote strings with `""`. Comments
+are written with `#`. 
+
+Let's create some variables.
+
+```{r, error=TRUE}
+n            <- 20
+x            <- 2.7
+m            <- n # m gets value 20
+my_flag      <- TRUE
+student_name <- "Luka"
+student_name <- Luka # because there is no variable Luka, it returns an error
+```
+
+By using the function `typeof()` we can check the type of a variable. 
+
+
+```{r}
+typeof(n)
+typeof(student_name)
+typeof(my_flag)
+```
+
+We can change the types of variables with as.type functions.
+The main 
+types are **integer**, **double**, **character** (strings), and **logical**.
+Note that the type character is used for strings and we do not have a separate
+type for single characters.
+
+```{r, error=TRUE}
+typeof(as.integer(n))
+typeof(as.character(n))
+```
+
+Another common type is date. We can convert a character string to a date with
+the `as.Date()` function. When using this function, we have to be careful to
+provide the correct format of the date.
+
+```{r, error=TRUE}
+some_date <- as.Date("2019-01-01", format = "%Y-%m-%d")
+some_date
+```
+
+
+To access the values of the variables, we use variable names.
+
+```{r error=TRUE}
+n
+m
+my_flag
+student_name
+```
+
+We can apply arithmetic operations on numerical variables.
+
+```{r}
+n + x
+n - x
+diff <- n - x # variable diff gets the difference between n and x
+diff
+n * x
+n / x
+x^2
+sqrt(x)
+n > 2 * n # logical is greater
+n == n # equals
+n == 2 * n
+n != n # not equals
+```
+
+We can concatenate strings with functions `paste()` and `paste0()`. The
+difference between these functions is that the first one forces a space
+between inputs, while the second one does not.
+
+```{r}
+paste(student_name, "is", n, "years old")
+paste0(student_name, "is", n, "years old")
+L_username <- paste0(student_name, n)
+```
+
+Function `paste()` can get an additional parameter `sep`, which should
+be used between the inputs. If we want to find out more about a function, 
+we put a question mark before the function's name in the console.
+
+```{r}
+# ?paste
+paste(student_name, "is", n, "years_old", sep = "_")
+```
+
+
+# Basic data structures
+
+
+## Vector
+
+
+Vectors are the most common data structure in R. They consist of several
+elements of the same type. We create them with the function `c()` (combine).
+
+
+```{r}
+student_ages  <- c(20, 23, 21)
+student_names <- c("Luke", "Jen", "Mike")
+passed        <- c(TRUE, TRUE, FALSE)
+```
+
+To access individual elements of vectors we use square brackets with the
+sequential number of the elements we want. 
+**The indexing in R starts with 1**, as opposed to 0 (C++, Java,...).
+
+
+```{r}
+student_ages[2]
+student_names[2]
+passed[2]
+```
+
+To get the length of the vector use `length()`.
+
+
+```{r}
+length(student_names)
+```
+
+We can use element-wise arithmetic operations on vectors, and we can use
+the scalar product (`%*%`). 
+Note that you have to be careful with vector lengths. 
+For example, if we have an operation on two elements---in our case vectors---and
+they are not of the same length, the smaller one will start preiodically
+repeating itself, until it reaches the size of the larger one. In that case,
+R will provide us with a warning. 
+
+
+```{r error = TRUE}
+a <- c(1, 3, 5)
+b <- c(2, 2, 1)
+d <- c(6, 7)
+a + b
+a * b
+a + d # not the same length, d becomes (6, 7, 6)
+a + 2 * b
+a %*% b # scalar product
+a > b # logical relations between elements
+b == a
+```
+
+We often want to select only specific elements of a vector. There are several
+ways to do that---for example all of the calls below return the first two
+elements of vector `a`.
+
+
+
+```{r error = TRUE}
+a[c(TRUE, TRUE, FALSE)] # selection based on logical vector
+a[c(1,2)] # selection based on indexes
+a[a < 5] # selection based on logical condition
+```
+
+We can also use several conditions. If we want both conditions to hold, we use
+and (`&`), if only one has to hold we use if (`|`). Note that only here we
+use only a single 
+symbol for each, as opposed to some other programming languages
+that use two.
+
+```{r error = TRUE}
+a[a > 2 & a < 4]
+a[a < 2 | a > 4]
+```
+
+
+## Factor
+
+Factors can be considered more as a variable type, than a data structure.
+But since they are based on vectors, we present them at this point.
+
+Factors are used for coding categorical variables, which can only take
+a finite number of predetermined values. We can further divide categorical
+variables into nominal and ordinal. Nominal values don't have an ordering
+(for example car brand), while ordinal variables do (for example 
+frequency---never, rarely, sometimes, often, always). Ordinal variables
+have an ordering but usually we can not assign values to them (for example
+sometimes is more than rarely, but we do not know how much more).
+
+In R we create factors with function `factor()`. When creating factors, we can
+determine in advance, which values the factor can take with the argument
+`levels`. If we wish to add a non-existing level to a factor variable, R
+turns it into NA.
+
+```{r error = TRUE}
+car_brand <- factor(c("Audi", "BMW", "Mercedes", "BMW"), ordered = FALSE)
+car_brand
+freq      <- factor(x       = NA,
+                    levels  = c("never","rarely","sometimes","often","always"),
+                    ordered = TRUE)
+freq[1:3] <- c("rarely", "sometimes", "rarely")
+freq
+freq[4]   <- "quite_often" # non-existing level, returns NA
+freq
+```
+
+
+
+## Matrix
+Two-dimensional generalizations of vectors are matrices. We create them
+with the function `matrix()`, where we have to provide the values and either
+the number of rows or columns. Additionally, the argument `byrow = TRUE` 
+fills the matrix with provided elements by rows (default is by columns).
+
+```{r}
+my_matrix <- matrix(c(1, 2, 1,
+                      5, 4, 2),
+                    nrow  = 2,
+                    byrow = TRUE)
+my_matrix
+my_square_matrix <- matrix(c(1, 3,
+                             2, 3),
+                           nrow  = 2)
+my_square_matrix
+```
+
+To access individual elements we use square brackets, where we divide the
+dimensions by a comma.
+
+```{r}
+my_matrix[1,2] # first row, second column
+my_matrix[2, ] # second row
+my_matrix[ ,3] # third column
+```
+
+Some useful functions for matrices.
+
+
+```{r}
+nrow(my_matrix) # number of matrix rows
+ncol(my_matrix) # number of matrix columns
+dim(my_matrix) # matrix dimension
+t(my_matrix) # transpose
+diag(my_matrix) # the diagonal of the matrix as vector
+diag(1, nrow = 3) # creates a diagonal matrix
+det(my_square_matrix) # matrix determinant
+```
+
+We can also use arithmetic operations on matrices. Note that we have to be
+careful with matrix dimensions. For matrix multiplication, we use `%*%`
+
+
+```{r error = TRUE}
+my_matrix + 2 * my_matrix
+my_matrix * my_matrix # element-wise multiplication
+my_matrix %*% t(my_matrix) # matrix multiplication
+my_square_matrix %*% my_matrix
+my_matrix %*% my_square_matrix # wrong dimensions
+```
+
+We can transform a matrix into a vector.
+
+```{r error = TRUE}
+my_vec <- as.vector(my_matrix)
+my_vec
+```
+
+
+
+## Array
+Multi-dimensional generalizations of matrices are arrays.
+
+```{r}
+my_array <- array(c(1, 2, 3, 4, 5, 6, 7, 8), dim = c(2, 2, 2))
+my_array[1, 1, 1]
+my_array[2, 2, 1]
+my_array[1, , ]
+dim(my_array)
+```
+
+
+## Data frame
+
+Data frames are the basic data structure used in R for data analysis. 
+It has the form of a table, where columns represent individual variables, and
+rows represent observations. They differ from matrices, as the columns can be
+of different types. We access elements the same way as in matrices.
+
+We can combine vectors into data frames with `data.frame()`. The
+function transforms variables of type character into factors by default.
+if we do not want that, we have to add an argument `stringsAsFactors = FALSE`. 
+We can assign column names with the function `colnames()`. 
+
+
+```{r}
+student_data           <- data.frame(student_names, student_ages, passed,
+                                     stringsAsFactors = FALSE)
+colnames(student_data) <- c("Name", "Age", "Pass")
+student_data
+```
+
+
+We can also assign column names directly, when creating a data frame.
+
+```{r}
+student_data <- data.frame("Name" = student_names, 
+                           "Age"  = student_ages, 
+                           "Pass" = passed)
+student_data
+```
+
+Similar to vectors, we can access the elements in data frames (and matrices) 
+with logical calls. Here we need to be careful if we are selecting rows or
+columns. To access specific columns, we can also use the name of the column
+preceded by `$`.
+
+
+```{r}
+student_data[ ,colnames(student_data) %in% c("Name", "Pass")]
+student_data[student_data$Pass == TRUE, ]
+student_data$Pass
+```
+
+
+
+## List
+
+Lists are very useful data structure, especially when we are dealing with 
+different data sets and data structures. We can imagine a list as a vector, 
+where each element can be a different data structure. For example, a list can
+have a vector stored on index 1, a matrix on index 2, and a data frame on
+index 3. Moreover, a list can be an element of a list and so on.
+
+
+```{r}
+first_list  <- list(student_ages, my_matrix, student_data)
+second_list <- list(student_ages, my_matrix, student_data, first_list)
+```
+
+We access the elements of a list with double square brackets.
+
+
+```{r}
+first_list[[1]]
+second_list[[4]]
+second_list[[4]][[1]] # first element of the fourth element of second_list
+```
+
+We can also apply `length()` to get the number of elements in the list.
+
+```{r}
+length(second_list)
+```
+
+To append to list, we use the call below.
+
+```{r}
+second_list[[length(second_list) + 1]] <- "add_me"
+second_list[[length(second_list)]] # check, what is on the last index
+```
+
+Additionally, we can name the elements of the list, and access them by name.
+For that we use the `names()` function.
+
+```{r}
+names(first_list) <- c("Age", "Matrix", "Data")
+first_list$Age
+```
+
+
+# Packages
+
+R is an open-source programming language and anyone can contribute to its
+development. Many packages exist that make our work in R easier. 
+Additionally, some packages include different
+statistical models---some of which are implemented in other languages for
+efficiency (for example C++). An open-source repository CRAN consists of most
+packages that you are going to need. To install a specific package, we use
+the function `install.packages()`, or we can use R-Studio's UI. Once a
+package is installed, we can load it into our workspace with `library()`. 
+We will get to know several useful packages during this workshop.
+
+
+```{r eval = FALSE}
+install.packages("stats") # install package
+library(stats) # load the package into workspace
+```
+
+
+
+# Data import {#bpod}
+
+We often encounter data in a csv (comma separated value) format. Different
+pacakges in R allow us to read data from csv, txt, xlsx, etc. formats.
+Here we will go through reading data from csv and xlsx formats.
+
+To read csv data use `read.csv` from the
+package `utils`. Before we read the data, we need to check two things.
+First, what is the character that separates the columns and how the decimal
+places are denoted (comma or dot). 
+Second, if the data have a header (Does the first row contain column names?).
+Function automatically returns a data frame. `read.csv()` assumes that
+comma is the separator and a decimal point. However, it allows the
+change of these default values by providing the corresponding arguments. It
+also assumes that we have a header by default. When saving your data in the
+CSV format, we recommend using a semi-colon as the separator, as comma is
+often used a) in text, b) as the decimal separator, or c) as 
+thousands separator.
+
+In our **data** folder, we have medical insurance data set acquired from Kaggle
+. To show different reading functions, we saved the data set in three
+different formats---csv with a comma separator, csv with a semi-colon
+separator, and xlsx file. The file also contains a 
+header. Function `head()` returns
+the first six rows of the data frame.
+
+
+```{r}
+library(utils)
+claim_data <- read.csv("./data/insurance01.csv")
+head(claim_data)
+```
+
+The dot in the string represents current working directory. We see that
+R automatically converted string variables (sex, smoker, region) to factors.
+In our case this is sensible. However, sometimes we want strings to remain
+strings. In those cases, change the argument `stringsAsFactors` to false.
+
+Along with a semi-colon as the separator, the second file has
+a decimal comma. Therefore
+
+```{r eval = FALSE}
+claim_data <- read.csv("./data/insurance02.csv", sep = ";", dec = ",")
+```
+
+Data is often saved as xlsx. To read data from xlsx, we use the `read.xlsx`
+function from the package __xlsx__. 
+However, this function can be quite slow, so if you are dealing with
+large data frames, it might be better to save the excel file as a csv file
+and then read it as csv.
+
+```{r eval = FALSE}
+library(xlsx)
+claim_data <- read.csv("./data/insurance03.xlsx")
+```
+
+# If statement
+We often want to execute code based on some condition. For that we use
+the `if`-`else` pair.
+
+```{r}
+if_example <- function (x) {
+  if (x <= 0) {
+    print("x is smaller or equal to 0")
+  } else {
+    print("x is greater than 0")
+  }
+}
+if_example(5)
+if_example(-2)
+```
+
+# Loops
+The most useful loop in R is the for loop. In the for loop we have to define
+a new variable, which will represent the different iterations of the loop.
+Then we have to define the values over which that variable will iterate. Often,
+these are sequential numbers. For example, let us add first 10 natural numbers.
+
+```{r}
+my_sum <- 0
+for (i in 1:10) { # 1:10 returns a vector of natural numbers between 1 and 10
+  my_sum <- my_sum + i
+}
+my_sum
+```
+
+The values in a for loop do not have to be sequential numbers.
+
+```{r}
+my_sum       <- 0
+some_numbers <- c(2, 3.5, 6, 100)
+for (i in some_numbers) {
+  my_sum <- my_sum + i
+}
+my_sum
+```
+
+For example, let us calculate the average charges per region on our data set.
+
+```{r}
+regions <- unique(claim_data$region) # returns unique values in region column
+for (reg in regions) {
+  tmp_data   <- claim_data[claim_data$region == reg, ]
+  charges    <- tmp_data$charges
+  print(paste0("Region: ", reg, 
+               ", average charges: ", mean(charges)))
+}
+```
+
+
+
+# Functions
+Base R consists of several function intended for easier work with data, for
+example `length()`, `dim()`, `colnames()`,... We can extend the set of functions
+with packages. For example, package **stats** allows us to create statistical
+models with the use of a single function---for example the linear model `lm()`.
+Here we will present some useful functions, more complex functions will 
+follow in later chapters. Remember, if you want additional information about
+functions, we can call the name of the function in the console, where we
+add a question mark (for example `?length`). 
+
+
+```{r}
+1:10 # special function that returns a sequence of numbers
+sum(1:10) # sum of first 10 natural numbers
+sum(c(3,5,6,3))
+rep(1, times = 5) # returns a vector of lenght 5, where all values are 1
+rep(c(1,2), times = 5) # returns a vector of length 5 where 1 and 2 are periodically changing
+seq(0, 2, by = 0.5) # vector from 0 to 2, by adding 0.5
+prod(1:10) # multiply first 10 numbers
+round(5.24)
+5^5 # square
+sqrt(16) # square root
+as.character(c(1,6,3)) # transforms a numerical vector to a character vector
+```
+
+
+We often want a summary of our data. We can get it with `summary()`. We
+can use it on vectors and on data frames. The returned values are dependent
+on the types of variables.
+
+
+```{r}
+summary(student_ages)
+summary(student_names)
+summary(passed)
+summary(car_brand)
+summary(freq)
+summary(student_data) # summary of the whole data frame
+```
+
+
+## Writing functions
+We can write our own functions with `function()`. In the brackets, we
+define the parameters the function gets, and in curly brackets we define what
+the function does. We use `return()` to return values.
+
+```{r}
+sum_first_n_elements <- function (n) {
+  my_sum <- 0
+  for (i in 1:n) {
+    my_sum <- my_sum + i
+  }
+  return (my_sum)
+}
+sum_first_n_elements(10)
+```
+
+If we want that the function returns several different data structures,
+we use a list. 
+For example, let us look at a function which gets a matrix 
+as input, and returns its transpose and determinant.
+
+
+```{r}
+get_transpose_and_det <- function (mat) {
+  trans_mat <- t(mat)
+  det_mat   <- det(mat)
+  out       <- list("transposed"  = trans_mat,
+                    "determinant" = det_mat)
+  return (out)
+}
+mat_vals <- get_transpose_and_det(my_square_matrix)
+mat_vals$transposed
+mat_vals$determinant
+```
+
+
+
+## Other useful functions for data summarizing
+There are several functions that are useful when working with data. We already
+mentioned the `summary()` function. Let's look at some other functions.
+
+To generate random numbers we can use a variety of random number generators.
+Which we select depends on the data that we wish to generate. Usually, we
+want to be able to replicate our analysis exactly, therefore we recommend the
+use of a seed---this will generate the same random numbers everytime you
+call the function. There is a function for that in R called `set.seed()`.
+
+```{r}
+set.seed(0)
+norm_dat  <- rnorm(1000, 5, 6) # generate 1000 samples from the normal
+                               # distribution with mean 5 and standard deviation 6
+count_dat <- rpois(2000, 8) # generate 2000 samples from the Poisson
+                            # distribution with mean 8
+unif_dat  <- runif(1000, -2, 5) # generate 1000 samples from the uniform
+                                # distribution form -2 to 5
+```
+
+In data science, we often work with statistics, so let's look at some functions
+which provide us with meaningful information about our data.
+
+```{r}
+mean(norm_dat)
+var(norm_dat) # variance
+sd(norm_dat) # standard deviation
+max(norm_dat)
+min(norm_dat)
+quantile(norm_dat) # calculates 5 quantiles of the data
+```
+
+We often want to standardize the data, before doing analysis. We can do that
+manually, or we can use R's `scale()` function.
+
+```{r}
+st_dat <- scale(norm_dat)
+mean(st_dat)
+var(st_dat)
+```
+
+
+# Debugging
+For the debugging in R we will use the `browser()` function. It stops the
+execution of the code and you can access the variables in the environment at 
+the moment that browser was called.
+
+For browser commands see ?browser or type help when browser is active.
+
+
+# Data wrangling with dplyr
+Dplyr is a package for easier data manipulation. It is a part of a collection of
+packages called **tidyverse**, which consist of several R packages intended for
+data science. Dplyr is especially useful for data frame manipulation.
+
+The main format of working with data in tidyverse is a **tibble**. This data
+structure is very smilar to base R's data frame, however it is designed for
+easier work with other packages in tidyverse and also provides a different
+print output. Let's look at it on our football data set.
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+```
+```{r}
+claim_data <- read.csv("./data/insurance01.csv")
+head(claim_data)
+
+claim_data <- as_tibble(claim_data)
+claim_data
+```
+
+A tibble only shows the first 10 rows of the data set for clarity. Additionally,
+it only prints as many columns as fit into a page, and lists other columns
+below. If we wish to see all of the tibble, we can use the function `View()`.
+Under the variable names, a tibble shows the type of the variables. 
+
+Now that we have our starting data set, we can begin manipulating it. This
+usually consists of selecting specific rows and columns, and adding statistics
+derived from variables in the data frame. Below we describe five functions
+which will enable us dynamic data set manipulation.
+
+## Filter
+The function `filter()` allows us to select rows, based on values of the
+variables. As input it gets a tibble and the conditions and it outputs a new
+tibble that consists only of desired rows.
+
+```{r warning=FALSE}
+filter(claim_data, region == "southwest")
+filter(claim_data, region == "southwest", age > 18)
+```
+
+The conditions in filter use and---all conditions have to be satisfied. If
+we want to use or, we have to divide them with a pipe |.
+
+```{r}
+filter(claim_data, region == "southwest" | region == "northwest")
+```
+
+Or, the same can be achieved by using the operator %in%.
+
+```{r}
+filter(claim_data, region %in% c("southwest", "northwest"))
+```
+
+For example, let's say we are interested in doing further analysis on
+people older than 18, who live in the south. We can construct a new tibble,
+where we filter out the unnecessary rows.
+
+```{r}
+claim_df <- filter(claim_data, region %in% c("southwest", "southeast"), 
+                   age > 18)
+```
+
+## Arrange
+To arrange data we use dplyr's function `arrange()`, which gets a tibble and the
+variables on which to arrange. If we want a descending arrangement, we have to 
+use function `desc()`.
+
+```{r}
+arrange(claim_df, age)
+arrange(claim_df, age, desc(charges))
+```
+
+
+
+## Select
+In our current data set we have a relatively small number of columns, so 
+working with our tibble is not too complicated. However, we often encounter
+data sets with large numbers of columns. In such situations, we might want
+to select a subset of columns. For that we have the function `select`.
+
+To select certain columns, input the names into select.
+
+```{r}
+select(claim_df, age, sex)
+```
+
+We can also select all columns between two columns with a colon. Using a
+minus sign will select all columns except the ones in the expression.
+
+```{r}
+select(claim_df, bmi:region)
+select(claim_df, -(bmi:region))
+```
+
+There are several utility functions that let us select columns based on
+their names, for example `ends_with`, `starts_with`, or `contains`.
+
+```{r}
+select(claim_df, starts_with("c"))
+```
+
+
+
+## Mutate
+To create new variables in the data frame, dependent on the existing variables,
+we can use the `mutate()` function. For example, let's create a new variable,
+which will consist of charges per insured person.
+
+```{r}
+claim_df <- mutate(claim_df, charges_per_person = charges / (children + 1))
+claim_df
+```
+
+We can also use own functions when creating new variables. 
+For example, let us create a new variable, which will classify the
+insured according to the standard BMI categories.
+
+```{r}
+classify_bmi <- function (bmi) {
+  bmi_classes <- rep("underweight", times = length(bmi))
+  bmi_classes[bmi >= 18.5 & bmi < 25] <- "normal"
+  bmi_classes[bmi >= 25]              <- "overweight"
+  bmi_classes <- factor(bmi_classes, levels = c("underweight", 
+                                                "normal", 
+                                                "overweight"),
+                        ordered = TRUE)
+  return(bmi_classes)
+}
+claim_df <- mutate(claim_df, bmi_class = classify_bmi(bmi))
+claim_df
+```
+The tibble is too wide to show all variables. Let us use select to
+check the values of our new variable.
+
+```{r}
+select(claim_df, bmi, bmi_class)
+```
+
+
+## Summarise
+The `summarise` function aggregates the data according to some condition.
+Conditions are provided with the function `group_by`, if they are not, 
+the data are aggregated over the whole tibble.
+
+```{r}
+summarise(claim_df, mean_age = mean(age), mean_charges = mean(charges))
+```
+
+To get something more meaningful, we first need to group the data.
+For example let us look at the mean charges, dependent on whether
+the insured is a smoker and his BMI class.
+
+```{r}
+g_data <- group_by(claim_df, smoker, bmi_class)
+summarise(g_data, mean_charges = mean(charges))
+```
+
+
+
+
+## The pipe
+To arrive at the above results we made several changes to the original data
+set. However, we can use the pipe `%>%` to do all these calls sequentially,
+without
+creating an additional data set, or changing the original.
+
+Let us demonstrate how to get the same result as above with use of the pipe.
+
+```{r}
+claim_df %>%
+  filter(age >= 18, region %in% c("southwest", "southeast")) %>%
+  mutate(bmi_class = classify_bmi(bmi)) %>%
+  group_by(smoker, bmi_class) %>%
+  summarise(mean_charges = mean(charges))
+```
+
+To count the number of cases in each group, use `count()`.
+
+```{r}
+claim_df %>%
+  filter(age >= 18, region %in% c("southwest", "southeast")) %>%
+  mutate(bmi_class = classify_bmi(bmi)) %>%
+  group_by(smoker, bmi_class) %>%
+  count()
+```
+

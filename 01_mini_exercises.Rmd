@@ -1,0 +1,30 @@
+## Mini exercises -- R introduction and dplyr
+
+### Vectors
+Let $m = 9$.
+
+* Create a vector $x$, which is a sequence of equally spaced numbers
+  between -2 and 2 of length $m$.
+* Create a vector $y$ of the squares of first $m$ integers.
+* Create a vector $z$ by dividing $y$ by $x$.
+* Find the mean, median, and standard deviation of $z$.
+* Standardize $z$.
+* Implement a function with parameter $m$, which outputs a list with the
+  above calculations.
+
+
+### Functions
+Write a function that takes vectors $x$ and $y$ of the same length and a
+real value $z$. The function should return the number of indices $i$, where
+$x_i + y_i > z$.
+
+
+### Debugging
+Open the __01-debug_exercise.R script__. The script contains a small program,
+which should return all prime numbers up to the parameter. It does so by
+first looping through all the integers (greater than 2) and second looping 
+through smaller
+integers than the current one to check if any of them divide it. 
+Run the script. Apparently the function does not work as it should. 
+Debug it with `browser()` by checking the values of variables at each iteration
+and correct the mistake.
