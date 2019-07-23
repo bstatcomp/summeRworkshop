@@ -11,15 +11,14 @@ In this example, we'll visualize the average recorded male and female height at 
 
 ```{r}
 library(ggplot2)
-library(reshape2)
+library(tidyr)
 
 # we obtained this dataset from https://ourworldindata.org/human-height
 dat <- read.csv(file = "./data/average-height-by-year-of-birth.csv")
 dat <- dat[dat$Entity == "Slovenia" | dat$Entity == "Sweden",]
 dat <- dat[,c(1,3,4,5)]         
 names(dat) <- c("Country", "Year", "Male", "Female")
-dat <- melt(dat, id.vars = c("Country", "Year"))
-names(dat) <- c("Country", "Year", "Gender", "Height")
+dat <- gather(dat, "Gender", "Height", -Country, -Year)
 
 # print a few randomly selected rows
 set.seed(0)
@@ -181,10 +180,9 @@ df <- merge(dat, geo)
 
 
 # create plot
-library(maps)
-thismap = map_data("world")
+world_map <- readRDS("./data/world_map.rds") # preloaded from maps package
 ggplot() +
-  geom_polygon(thismap, mapping = aes(x = long, y = lat, group=group), fill="white", colour="gray")
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group=group), fill="white", colour="gray")
 
 ```
 
