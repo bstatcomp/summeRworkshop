@@ -1,7 +1,7 @@
 ---
 title: "Interactive visualizations with Shiny"
+author: "Gregor Pirs, Jure Demsar and Erik Strumbelj"
 date: "25/7/2019"
-author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
 output:
   prettydoc::html_pretty:
     theme: architect

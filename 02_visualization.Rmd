@@ -1,6 +1,6 @@
 ---
-title: "R introduction and dplyr"
-author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
+title: "Visualizations in R"
+author: "Gregor Pirs, Jure Demsar and Erik Strumbelj"
 date: "25/7/2019"
 output:
     prettydoc::html_pretty:
