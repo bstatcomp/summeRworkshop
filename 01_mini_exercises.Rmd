@@ -35,11 +35,4 @@ $x_i + y_i > z$.
 
 
 ### Debugging
-Open the __01-debug_exercise.R script__. The script contains a small program,
-which should return all prime numbers up to the parameter. It does so by
-first looping through all the integers (greater than 2) and second looping 
-through smaller
-integers than the current one to check if any of them divide it. 
-Run the script. Apparently the function does not work as it should. 
-Debug it with `browser()` by checking the values of variables at each iteration
-and correct the mistake.
+Open the *01-debug\_exercise.R* script. The script contains a small program, which should return all prime numbers up to the parameter. It does so by first looping through all the integers (greater than 2) and second looping  through smaller integers than the current one to check if any of them divide it.  Run the script. Apparently the function does not work as it should.  Debug it with `browser()` by checking the values of variables at each iteration and correct the mistake.

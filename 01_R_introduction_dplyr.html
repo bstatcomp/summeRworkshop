@@ -10,7 +10,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Gregor Pirš, Jure Demšar, and Erik Štrumbelj" />
+<meta name="author" content="Gregor Pirš, Jure Demšar and Erik Štrumbelj" />
 
 
 <title>R introduction and dplyr</title>
@@ -106,7 +106,7 @@ code > span.ot { color: #007020; }
 <header>
 <div class="inner">
 <h1 class="title toc-ignore">R introduction and dplyr</h1>
-<h3 class="author">Gregor Pirš, Jure Demšar, and Erik Štrumbelj</h3>
+<h3 class="author">Gregor Pirš, Jure Demšar and Erik Štrumbelj</h3>
 <h3 class="date">25/7/2019</h3>
 </div>
 </header>
@@ -928,7 +928,7 @@ code > span.ot { color: #007020; }
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">g_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(claim_df, smoker, bmi_class)</a>
 <a class="sourceLine" id="cb267-2" title="2"><span class="kw">summarise</span>(g_data, <span class="dt">mean_charges =</span> <span class="kw">mean</span>(charges))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
-## # Groups:   smoker [?]
+## # Groups:   smoker [2]
 ##   smoker bmi_class   mean_charges
 ##   &lt;fct&gt;  &lt;ord&gt;              &lt;dbl&gt;
 ## 1 no     normal            10454.
@@ -947,7 +947,7 @@ code > span.ot { color: #007020; }
 <a class="sourceLine" id="cb269-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(smoker, bmi_class) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb269-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_charges =</span> <span class="kw">mean</span>(charges))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
-## # Groups:   smoker [?]
+## # Groups:   smoker [2]
 ##   smoker bmi_class   mean_charges
 ##   &lt;fct&gt;  &lt;ord&gt;              &lt;dbl&gt;
 ## 1 no     normal            10454.

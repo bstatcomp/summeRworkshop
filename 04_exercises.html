@@ -10,7 +10,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Gregor Pirš, Jure Demšar, and Erik Štrumbelj" />
+<meta name="author" content="Gregor Pirš, Jure Demšar and Erik Štrumbelj" />
 
 
 <title>summeRworkshop exercises</title>
@@ -42,7 +42,7 @@ code > span.ot { color: #007020; }
 <header>
 <div class="inner">
 <h1 class="title toc-ignore">summeRworkshop exercises</h1>
-<h3 class="author">Gregor Pirš, Jure Demšar, and Erik Štrumbelj</h3>
+<h3 class="author">Gregor Pirš, Jure Demšar and Erik Štrumbelj</h3>
 <h3 class="date">25/7/2019</h3>
 </div>
 </header>
@@ -59,7 +59,7 @@ code > span.ot { color: #007020; }
 <h1>R introduction and dplyr</h1>
 <div id="exercise-1" class="section level2">
 <h2>Exercise 1</h2>
-<p>Create vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, where <span class="math inline">\(x\)</span> is a sequence of integers between 4 and 25, and <span class="math inline">\(y\)</span> is a sequence of the same length as <span class="math inline">\(x\)</span> from -5 to 2.</p>
+<p>Create vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, where <span class="math inline">\(x\)</span> is a sequence of integers between 4 and 25 and <span class="math inline">\(y\)</span> is a sequence of the same length as <span class="math inline">\(x\)</span> from -5 to 2.</p>
 <ul>
 <li>Calculate the second powers of elements of <span class="math inline">\(y\)</span>.</li>
 <li>Sum <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
@@ -110,7 +110,7 @@ code > span.ot { color: #007020; }
 </div>
 <div id="exercise-6-machine-learning-and-data-science-jobs" class="section level2">
 <h2>Exercise 6 (Machine learning and data science jobs)</h2>
-<p>Read the DSjobs.csv data (source: <a href="https://www.kaggle.com/kaggle/kaggle-survey-2017" class="uri">https://www.kaggle.com/kaggle/kaggle-survey-2017</a>) and save it as a tibble. The observations in the data set are people who work in machine learning and data science jobs around the world, their information (nationality, gender, job title,…), and their compensation (wages). The data is based on a survey done by Kaggle.</p>
+<p>Read the <code>DSjobs.csv</code> data (source: <a href="https://www.kaggle.com/kaggle/kaggle-survey-2017" class="uri">https://www.kaggle.com/kaggle/kaggle-survey-2017</a>) and save it as a tibble. The observations in the data set are people who work in machine learning and data science jobs around the world, their information (nationality, gender, job title,…) and their compensation (wages). The data is based on a survey done by Kaggle.</p>
 <p>Do the following tasks on the original data set:</p>
 <ul>
 <li>remove all columns starting with “Time”,</li>
@@ -123,13 +123,13 @@ code > span.ot { color: #007020; }
 </div>
 <div id="exercise-7-nba-players" class="section level2">
 <h2>Exercise 7 (NBA players)</h2>
-<p>Read the plyer_wage.csv data (source: <a href="https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary" class="uri">https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary</a>) and save it as a tibble. The observations in the data set are NBA players, their information (statistics, nationality,…), and their wages. For a glossary of NBA terms, see <a href="https://www.basketball-reference.com/about/glossary.html" class="uri">https://www.basketball-reference.com/about/glossary.html</a>.</p>
+<p>Read the <code>player_wage.csv</code> data (source: <a href="https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary" class="uri">https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary</a>) and save it as a tibble. The observations in the data set are NBA players, their information (statistics, nationality,…) and their wages. For a glossary of NBA terms, see <a href="https://www.basketball-reference.com/about/glossary.html" class="uri">https://www.basketball-reference.com/about/glossary.html</a>.</p>
 <p>Do the following tasks on the original data set:</p>
 <ul>
 <li>create a tibble with only Slovenian players,</li>
 <li>create a tibble with all USA players who play for Golden State Warriors (GWS),</li>
 <li>arrange Players first by age, then by salary, both descending</li>
-<li>create a tibble with columns name, country, draft number, age, and team,</li>
+<li>create a tibble with columns name, country, draft number, age and team,</li>
 <li>add a new variable to the data frame, minutes per game (MPG),</li>
 <li>create a tibble with average salary per team descending,</li>
 <li>create a tibble with average salary per country descending,</li>
@@ -142,6 +142,16 @@ code > span.ot { color: #007020; }
 </div>
 <div id="basic-data-analysis-and-dynamic-reports" class="section level1">
 <h1>Basic data analysis and dynamic reports</h1>
+<div id="exercise-1-1" class="section level2">
+<h2>Exercise 1</h2>
+<p>Create a R Markdown report where you analyse temperatures in three countres – Slovenia, Finland and Niger. In the first section of the report create two tables, one table shows the mean summer temperature for each country for each month separately. The second table is simlar, but insted of means it should show 95% confindence intervals.</p>
+<p>In the second section use linear modelling (<code>lm</code>) to find out if temperature is rising through the ages. Run the analysis separately for each country and report your findings. Plot the three regression lines by using the <code>ggplot</code> library.</p>
+</div>
+<div id="exercise-2-1" class="section level2">
+<h2>Exercise 2</h2>
+<p>Design a Shiny app which enables you to compare temperature in Slovenia, Finland and Niger. Add three control sliders – one for the amount of bins in the histogram, one for determining the year interval and one for months interval. To plot temperatures use a single <code>ggplot</code> histogram graph, separate it into three sub-graphs with faceting.</p>
+<p>If you feel adventurous you can design a different visualization (you can use different controls and a different type of graph).</p>
+</div>
 </div>
     </section>
   </div>
