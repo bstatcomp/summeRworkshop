@@ -14,6 +14,8 @@ output:
 </div>
 
 
+# R introduction and dplyr
+
 ## Exercise 1
 Create vectors $x$ and $y$, where $x$ is a sequence of integers between 4 and 
 25, 
@@ -32,12 +34,12 @@ and $y$ is a sequence of the same length as $x$ from -5 to 2.
 Create a data frame that includes at least 5 rows (observations). Additionally,
 the data frame should include at least one of each of the following variables:
 
-* integer
-* numeric
-* date
-* character
-* nominal factor
-* ordinal factor
+* integer,
+* numeric,
+* date,
+* character,
+* nominal factor,
+* ordinal factor.
 
 
 ## Exercise 3
@@ -60,26 +62,15 @@ Calculate:
 
 
 ## Exercise 4
-Write a function that takes vector $x$ and iterates over its values.
-At each iteration the function prints whether $x$ is greater than 0, 
-lower than zero, or equal to zero. (see `?print`). Use the function
-by taking $x$---30 random numbers from a normal distribution with 
-mean 3 and variance 4.
+Write a function that takes vector $x$ and iterates over its values. At each iteration the function prints whether $x$ is greater than 0,  lower than zero, or equal to zero. (see `?print`). Use the function by taking $x$---30 random numbers from a normal distribution with  mean 3 and variance 4.
 
 
 ## Exercise 5 (Fibonacci)
-Write a function with parameter _n_, which outputs the first n Fibonacci
-numbers.  The n-th Fibonacci number is calculated as $F_n = F_{n-1} + F_{n-2}$,
-$F_0 = 0$, and $F_1 = 1$.
+Write a function with parameter _n_, which outputs the first n Fibonacci numbers.  The n-th Fibonacci number is calculated as $F_n = F_{n-1} + F_{n-2}$, $F_0 = 0$, and $F_1 = 1$.
 
 
 ## Exercise 6 (Machine learning and data science jobs)
-Read the DSjobs.csv data
-(source: https://www.kaggle.com/kaggle/kaggle-survey-2017)
-and save it as a tibble. The observations in the
-data set are people who work in machine learning and data science jobs around
-the world, their information (nationality, gender, job title,...), and
-their compensation (wages). The data is based on a survey done by Kaggle.
+Read the DSjobs.csv data (source: https://www.kaggle.com/kaggle/kaggle-survey-2017) and save it as a tibble. The observations in the data set are people who work in machine learning and data science jobs around the world, their information (nationality, gender, job title,...), and their compensation (wages). The data is based on a survey done by Kaggle.
 
 Do the following tasks on the original data set:
 
@@ -95,12 +86,7 @@ Do the following tasks on the original data set:
 
 
 ## Exercise 7 (NBA players)
-Read the plyer_wage.csv data
-(source: https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary)
-and save it as a tibble. The observations in the
-data set are NBA players, their information (statistics, nationality,...), and
-their wages. For a glossary of NBA terms, see 
-https://www.basketball-reference.com/about/glossary.html.
+Read the plyer_wage.csv data (source: https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary) and save it as a tibble. The observations in the data set are NBA players, their information (statistics, nationality,...), and their wages. For a glossary of NBA terms, see  https://www.basketball-reference.com/about/glossary.html.
 
 Do the following tasks on the original data set:
 
@@ -114,3 +100,10 @@ Do the following tasks on the original data set:
 * create a 
   tibble with players from the USA, summarise the salary per minutes
   played, grouped by team (use the pipe!).
+  
+
+# Visualizations
+
+
+# Basic data analysis and dynamic reports
+
