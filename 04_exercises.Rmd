@@ -99,9 +99,6 @@ Do the following tasks on the original data set:
   played, grouped by team (use the pipe!).
   
 
-# Visualizations
-
-
 # Basic data analysis and dynamic reports
 
 ## Exercise 1
