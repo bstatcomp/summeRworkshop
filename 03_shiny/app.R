@@ -9,6 +9,7 @@
 
 library(shiny)
 library(dplyr)
+library(ggplot2)
 
 data <- read.csv("../data/temperature.csv", sep=";")
 data_slovenia <- data %>% filter(data$country == "Slovenia")
@@ -70,17 +71,12 @@ server <- function(input, output) {
             filter(month <= max_month & month >= min_month)
         
         slovenia_filtered <- filtered_data %>% filter(country == "Slovenia")
-        x <- slovenia_filtered$temperature
-        
-        # generate bins based on input$bins from ui.R
-        bins <- seq(-25, 50, length.out = input$bins + 1)
 
-        # draw the histogram with the specified number of bins
-        hist(x,
-             breaks = bins,
-             col = 'darkgray',
-             border = 'white',
-             main = "Slovenia")
+        ggplot(data=slovenia_filtered, aes(x=temperature)) +
+            geom_histogram(color="white", size=1, bins=input$bins, na.rm=TRUE) +
+            xlim(-25, 50) +
+            ggtitle("Slovenia") +
+            theme_minimal()
     })
     
     output$finland_plot <- renderPlot({
@@ -97,17 +93,12 @@ server <- function(input, output) {
             filter(month <= max_month & month >= min_month)
         
         finland_filtered <- filtered_data %>% filter(country == "Finland")
-        x <- finland_filtered$temperature
         
-        # generate bins based on input$bins from ui.R
-        bins <- seq(-25, 50, length.out = input$bins + 1)
-        
-        # draw the histogram with the specified number of bins
-        hist(x,
-             breaks = bins,
-             col = 'darkgray',
-             border = 'white',
-             main = "Finland")
+        ggplot(data=finland_filtered, aes(x=temperature)) +
+            geom_histogram(color="white", size=1, bins=input$bins, na.rm=TRUE) +
+            xlim(-25, 50) +
+            ggtitle("Finland") +
+            theme_minimal()
     })    
  
     output$niger_plot <- renderPlot({
@@ -124,17 +115,12 @@ server <- function(input, output) {
             filter(month <= max_month & month >= min_month)
         
         niger_filtered <- filtered_data %>% filter(country == "Niger")
-        x <- niger_filtered$temperature
-        
-        # generate bins based on input$bins from ui.R
-        bins <- seq(-25, 50, length.out = input$bins + 1)
-        
-        # draw the histogram with the specified number of bins
-        hist(x,
-             breaks = bins,
-             col = 'darkgray',
-             border = 'white',
-             main = "Niger")
+
+        ggplot(data=niger_filtered, aes(x=temperature)) +
+            geom_histogram(color="white", size=1, bins=input$bins, na.rm=TRUE) +
+            xlim(-25, 50) +
+            ggtitle("Niger") +
+            theme_minimal()
     })   
 }
 

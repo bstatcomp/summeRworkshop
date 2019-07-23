@@ -1,7 +1,7 @@
 ---
 title: "Interactive visualizations with Shiny"
 date: "25/7/2019"
-author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -15,13 +15,14 @@ output:
 </div>
 
 
-#Shiny
+# Shiny
 
-Shiny (https://shiny.rstudio.com/) is an R package that makes it easy to build interactive visualizations or even web apps straight from R. You can host standalone apps on a webpage or embed them in R Markdown documents. You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript. Shiny is a very powerful framework, you can see some example of what you can create with it here: https://shiny.rstudio.com/gallery/.
+Shiny (https://shiny.rstudio.com/) is an R package that makes it easy to build interactive visualizations or even web apps straight from R. You can host standalone apps on a webpage or embed them in R Markdown documents. You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript. Shiny is a very powerful framework, you can see some example of what you can create with it here: https://shiny.rstudio.com/gallery/. In this tutorial we will only scratch the surface of the Shiny package, more detailed tutorials can be found at https://shiny.rstudio.com/tutorial/.
 
 Since Shiny apps have a specific structure it is by far the easiest way to start desigining one by using the `New Project...` option in the `File` menu of RStudio. Next you have to select whether you want to put the new R project into an existing or into a new directory, after you select that, you can choose the `Shiny Web Application` option. The starting point is a runnable example that includes a histogram and a slider for selecting the amount of histogram bins.
 
 Shiny apps can be divided into two parts -- the UI part (front end) and the server part (back end). The UI part includes all the visual elements and their layout, while the back end includes computations and visualizations.
+
 
 ## UI
 
@@ -50,6 +51,11 @@ ui <- fluidPage(
 )
 ```
 
+The `fluidPage()` is the main building block in Shiny, it is the main web page that we can than further split into smaller parts where our GUI elements reside. The first object inside the `fluidPage` is the `titlePanel`, like the name suggests this is the title of your app. We can than either define a custom layout for our app by dividing the `fluidPage` into columns and rows or we can use one of the predefined layouts. Since this is an introductory course we will use a predefined `sidebarLayout`, in this layout the app is divided into two parts -- a side bar or menu on the left (`sidebarPanel`) and the main area (`mainPanel`) on the right. We will use the side bar to add various controls and the main area to plot our visualization.
+
+In the code above we have one control, called the `sliderInput`, it is named `bins`, the label describing it says `Number of bins:`, slider ranges from 1 to 50 and its default value is 30. The main are is composed of a single plot titled `distPlot`. In this example and the following exercise you will only have to use sliders, but the controls library supports many other types of inputs (https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/).
+
+
 ## Server
 
 ```
@@ -67,4 +73,4 @@ server <- function(input, output) {
 }
 ```
 
-
+The back end of our simple app only loads the data from the `faithful` dataset, sets the amount of bins and plots the histogram. Visualization above uses Shiny's `hist` function, but you can easily replace this with any ggplot you want!

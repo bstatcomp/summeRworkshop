@@ -1,7 +1,7 @@
 ---
 title: "Basic data analysis"
 date: "25/7/2019"
-author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -17,8 +17,22 @@ output:
 
 # Basic data analysis
 
-## Summary statistics
+## Descriptive (summary) statistics
+
+Mean
+
+Trimmed mean
+
+Median
+
+SD
+
+Confidence interval
+
+Spread/gather for creating tables
+
 
 ## Linear model
 
+Simple linear modelling, interpretation and visualization.
 

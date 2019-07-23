@@ -1,7 +1,7 @@
 ---
 title: "summeRworkshop exercises"
 date: "25/7/2019"
-author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -17,9 +17,7 @@ output:
 # R introduction and dplyr
 
 ## Exercise 1
-Create vectors $x$ and $y$, where $x$ is a sequence of integers between 4 and 
-25, 
-and $y$ is a sequence of the same length as $x$ from -5 to 2.
+Create vectors $x$ and $y$, where $x$ is a sequence of integers between 4 and 25 and $y$ is a sequence of the same length as $x$ from -5 to 2.
 
 * Calculate the second powers of elements of $y$.
 * Sum $x$ and $y$.
@@ -31,8 +29,7 @@ and $y$ is a sequence of the same length as $x$ from -5 to 2.
 
 
 ## Exercise 2
-Create a data frame that includes at least 5 rows (observations). Additionally,
-the data frame should include at least one of each of the following variables:
+Create a data frame that includes at least 5 rows (observations). Additionally, the data frame should include at least one of each of the following variables:
 
 * integer,
 * numeric,
@@ -70,7 +67,7 @@ Write a function with parameter _n_, which outputs the first $n$ Fibonacci numbe
 
 
 ## Exercise 6 (Machine learning and data science jobs)
-Read the DSjobs.csv data (source: https://www.kaggle.com/kaggle/kaggle-survey-2017) and save it as a tibble. The observations in the data set are people who work in machine learning and data science jobs around the world, their information (nationality, gender, job title,...), and their compensation (wages). The data is based on a survey done by Kaggle.
+Read the `DSjobs.csv` data (source: https://www.kaggle.com/kaggle/kaggle-survey-2017) and save it as a tibble. The observations in the data set are people who work in machine learning and data science jobs around the world, their information (nationality, gender, job title,...) and their compensation (wages). The data is based on a survey done by Kaggle.
 
 Do the following tasks on the original data set:
 
@@ -86,14 +83,14 @@ Do the following tasks on the original data set:
 
 
 ## Exercise 7 (NBA players)
-Read the plyer_wage.csv data (source: https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary) and save it as a tibble. The observations in the data set are NBA players, their information (statistics, nationality,...), and their wages. For a glossary of NBA terms, see  https://www.basketball-reference.com/about/glossary.html.
+Read the `player_wage.csv` data (source: https://www.kaggle.com/aishjun/nba-salaries-prediction-in-20172018-season#2017-18_NBA_salary) and save it as a tibble. The observations in the data set are NBA players, their information (statistics, nationality,...) and their wages. For a glossary of NBA terms, see  https://www.basketball-reference.com/about/glossary.html.
 
 Do the following tasks on the original data set:
 
 * create a tibble with only Slovenian players,
 * create a tibble with all USA players who play for Golden State Warriors (GWS),
 * arrange Players first by age, then by salary, both descending
-* create a tibble with columns name, country, draft number, age, and team,
+* create a tibble with columns name, country, draft number, age and team,
 * add a new variable to the data frame, minutes per game (MPG),
 * create a tibble with average salary per team descending,
 * create a tibble with average salary per country descending,
@@ -107,3 +104,13 @@ Do the following tasks on the original data set:
 
 # Basic data analysis and dynamic reports
 
+## Exercise 1
+Create a R Markdown report where you analyse temperatures in three countres -- Slovenia, Finland and Niger. In the first section of the report create two tables, one table shows the mean summer temperature for each country for each month separately. The second table is simlar, but insted of means it should show 95% confindence intervals.
+
+In the second section use linear modelling (`lm`) to find out if temperature is rising through the ages. Run the analysis separately for each country and report your findings. Plot the three regression lines by using the `ggplot` library.
+
+
+## Exercise 2
+Design a Shiny app which enables you to compare temperature in Slovenia, Finland and Niger. Add three control sliders -- one for the amount of bins in the histogram, one for determining the year interval and one for months interval. To plot temperatures use a single `ggplot` histogram graph, separate it into three sub-graphs with faceting.
+
+If you feel adventurous you can design a different visualization (you can use different controls and a different type of graph).

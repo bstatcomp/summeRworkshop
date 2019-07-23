@@ -1,7 +1,19 @@
 ---
-title: "Visualization using ggplot2"
-output: html_notebook
+title: "R introduction and dplyr"
+author: "Gregor Pirš, Jure Demšar and Erik Štrumbelj"
+date: "25/7/2019"
+output:
+    prettydoc::html_pretty:
+      highlight: github
+      theme: architect
+      toc: true
+      toc_depth: 2
 ---
+
+<div style="text-align:center">
+  <img src="./bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
 
 # Scatterplot and line plot
 
