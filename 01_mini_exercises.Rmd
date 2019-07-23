@@ -1,3 +1,18 @@
+---
+title: "summeRworkshop mini exercises"
+date: "25/7/2019"
+author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: no
+    highlight: github
+---
+
+<div style="text-align:center">
+  <img src="./bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
 ## Mini exercises -- R introduction and dplyr
 
 ### Vectors

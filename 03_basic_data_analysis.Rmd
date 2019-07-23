@@ -1,0 +1,24 @@
+---
+title: "Basic data analysis"
+date: "25/7/2019"
+author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: no
+    highlight: github
+---
+
+
+<div style="text-align:center">
+  <img src="bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
+
+# Basic data analysis
+
+## Summary statistics
+
+## Linear model
+
+

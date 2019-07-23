@@ -1,0 +1,33 @@
+---
+title: "Interactive visualizations with Shiny"
+date: "25/7/2019"
+author: "Gregor Pirš, Jure Demšar, and Erik Štrumbelj"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: no
+    highlight: github
+---
+
+
+<div style="text-align:center">
+  <img src="bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
+
+#Shiny
+
+Shiny (https://shiny.rstudio.com/) is an R package that makes it easy to build interactive visualizations or even web apps straight from R. You can host standalone apps on a webpage or embed them in R Markdown documents. You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript. Shiny is a very powerful framework, you can see some example of what you can create with it here: https://shiny.rstudio.com/gallery/.
+
+Since Shiny apps have a specific structure it is by far the easiest way to start desigining one by using the `New Project...` option in the `File` menu of RStudio. Next you have to select whether you want to put the new R project into an existing or into a new directory, after you select that, you can choose the `Shiny Web Application` option. The starting point is a runnable example that includes a histogram and a slider for selecting the amount of histogram bins.
+
+Shiny apps can be divided into two parts -- the UI part (front end) and the server part (back end). The UI part includes all the visual elements and their layout, while the back end includes computations and visualizations.
+
+
+## UI
+
+
+
+## Server
+
+
