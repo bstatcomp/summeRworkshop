@@ -66,7 +66,7 @@ Write a function that takes vector $x$ and iterates over its values. At each ite
 
 
 ## Exercise 5 (Fibonacci)
-Write a function with parameter _n_, which outputs the first n Fibonacci numbers.  The n-th Fibonacci number is calculated as $F_n = F_{n-1} + F_{n-2}$, $F_0 = 0$, and $F_1 = 1$.
+Write a function with parameter _n_, which outputs the first $n$ Fibonacci numbers. The $n$-th Fibonacci number is calculated as $F_n = F_{n-1} + F_{n-2}$, $F_0 = 0$, and $F_1 = 1$.
 
 
 ## Exercise 6 (Machine learning and data science jobs)

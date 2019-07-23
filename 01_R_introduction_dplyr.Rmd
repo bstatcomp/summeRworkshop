@@ -691,7 +691,7 @@ data science. Dplyr is especially useful for data frame manipulation.
 The main format of working with data in tidyverse is a **tibble**. This data
 structure is very smilar to base R's data frame, however it is designed for
 easier work with other packages in tidyverse and also provides a different
-print output. Let's look at it on our football data set.
+print output. Let's look at it on our insurance data set.
 
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
@@ -721,7 +721,7 @@ tibble that consists only of desired rows.
 
 ```{r warning=FALSE}
 filter(claim_data, region == "southwest")
-filter(claim_data, region == "southwest", age > 18)
+filter(claim_data, region == "southwest", age >= 30)
 ```
 
 The conditions in filter use and---all conditions have to be satisfied. If
@@ -743,7 +743,7 @@ where we filter out the unnecessary rows.
 
 ```{r}
 claim_df <- filter(claim_data, region %in% c("southwest", "southeast"), 
-                   age > 18)
+                   age >= 30)
 ```
 
 ## Arrange
