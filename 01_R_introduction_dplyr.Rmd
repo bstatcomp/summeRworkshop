@@ -678,7 +678,7 @@ var(st_dat)
 # Debugging
 For the debugging in R we will use the `browser()` function. It stops the
 execution of the code and you can access the variables in the environment at 
-the moment that browser was called.
+the moment that `browser()` was called.
 
 For browser commands see ?browser or type help when browser is active.
 
@@ -705,9 +705,9 @@ claim_data
 ```
 
 A tibble only shows the first 10 rows of the data set for clarity. Additionally,
-it only prints as many columns as fit into a page, and lists other columns
-below. If we wish to see all of the tibble, we can use the function `View()`.
-Under the variable names, a tibble shows the type of the variables. 
+it only prints as many columns as it can fit into a page, and lists other
+columns below. If we wish to see the whole tibble, we can use the function
+`View()`. Under the variable names, a tibble shows the type of the variables. 
 
 Now that we have our starting data set, we can begin manipulating it. This
 usually consists of selecting specific rows and columns, and adding statistics
@@ -715,8 +715,8 @@ derived from variables in the data frame. Below we describe five functions
 which will enable us dynamic data set manipulation.
 
 ## Filter
-The function `filter()` allows us to select rows, based on values of the
-variables. As input it gets a tibble and the conditions and it outputs a new
+The function `filter()` allows us to select rows, based on variable values.
+Input to the function is a tibble plus the conditions and the output is a new
 tibble that consists only of desired rows.
 
 ```{r warning=FALSE}
@@ -738,7 +738,7 @@ filter(claim_data, region %in% c("southwest", "northwest"))
 ```
 
 For example, let's say we are interested in doing further analysis on
-people older than 18, who live in the south. We can construct a new tibble,
+people older than 18 who live in the south. We can construct a new tibble,
 where we filter out the unnecessary rows.
 
 ```{r}
@@ -755,7 +755,6 @@ use function `desc()`.
 arrange(claim_df, age)
 arrange(claim_df, age, desc(charges))
 ```
-
 
 
 ## Select
@@ -788,7 +787,7 @@ select(claim_df, starts_with("c"))
 
 
 ## Mutate
-To create new variables in the data frame, dependent on the existing variables,
+To create new variables in the data frame, dependent on existing variables,
 we can use the `mutate()` function. For example, let's create a new variable,
 which will consist of charges per insured person.
 
@@ -797,7 +796,7 @@ claim_df <- mutate(claim_df, charges_per_person = charges / (children + 1))
 claim_df
 ```
 
-We can also use own functions when creating new variables. 
+We can also use custom functions when creating new variables. 
 For example, let us create a new variable, which will classify the
 insured according to the standard BMI categories.
 
@@ -815,6 +814,7 @@ classify_bmi <- function (bmi) {
 claim_df <- mutate(claim_df, bmi_class = classify_bmi(bmi))
 claim_df
 ```
+
 The tibble is too wide to show all variables. Let us use select to
 check the values of our new variable.
 
@@ -843,12 +843,10 @@ summarise(g_data, mean_charges = mean(charges))
 
 
 
-
 ## The pipe
 To arrive at the above results we made several changes to the original data
 set. However, we can use the pipe `%>%` to do all these calls sequentially,
-without
-creating an additional data set, or changing the original.
+without creating an additional data set, or changing the original.
 
 Let us demonstrate how to get the same result as above with use of the pipe.
 
@@ -872,7 +870,7 @@ claim_df %>%
 
 
 # Long and wide data formats
-Usually we encounter data in a wide format. A wide format of data is
+Usually we encounter data in the wide format. The wide format of data is
 a format where each row represents an object, some columns
 represent identifiers of this object, and several columns contain
 measurements associated with this object. On the other hand, in a long format 
@@ -880,16 +878,17 @@ each row represents a measurement. In other words, the columns that
 contain object identifiers remain unchanged, but we get a new row for
 each of the measured values. The long format is usually easier to process,
 while the wide format is easier to comprehend. Also several R functions
-(for example `ggplot`) require a long data format.
+(for example `ggplot`) require the long data format.
 
 The functions for conversion between the formats in __tidyr__ are 
-`gather` (wide to long) and `spread` (long to wide). Let us look how to
+`gather()` (wide to long) and `spread()` (long to wide). Let us look how to
 use them on a stock market data (acquired from the R package __datasets__).
 Here we have the daily closing prices of four major European stock indices 
 between the years 1991 and 1998. Each row represents an object -- the day
 of the closing prices. Then we have four measurements (prices). This
 data frame is therefore in a wide format. Let us convert it to a long format,
 and then back to wide, to see how to use `gather` and `spread`.
+
 ```{r, warning = FALSE}
 library(tidyr)
 stock_df <- datasets::EuStockMarkets
