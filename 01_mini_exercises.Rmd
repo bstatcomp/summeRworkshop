@@ -29,6 +29,7 @@ Let $m = 9$.
 ### Data frame
 Open the _01_data_frame_exercise.R_ script and run it. Now you should have a data frame in your working environment. Do the following (using base R and dplyr for comparison):
 
+* Summarize the data frame.
 * Print only females.
 * Print all males taller than 180cm.
 * Create a new variable which shows the BMI of each person.
