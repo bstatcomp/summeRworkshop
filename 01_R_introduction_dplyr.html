@@ -744,7 +744,7 @@ code > span.ot { color: #007020; }
 ##  9    30 male    35.3        0 yes    southwest  36837.
 ## 10    30 female  32.4        1 no     southwest   4150.
 ## # ... with 640 more rows</code></pre>
-<p>For example, let’s say we are interested in doing further analysis on people older than 18, who live in the south. We can construct a new tibble, where we filter out the unnecessary rows.</p>
+<p>For example, let’s say we are interested in doing further analysis on people older than 29, who live in the south. We can construct a new tibble, where we filter out the unnecessary rows.</p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1">claim_df &lt;-<span class="st"> </span><span class="kw">filter</span>(claim_data, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;southwest&quot;</span>, <span class="st">&quot;southeast&quot;</span>), </a>
 <a class="sourceLine" id="cb245-2" title="2">                   age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>)</a></code></pre></div>
 </div>
@@ -938,7 +938,7 @@ code > span.ot { color: #007020; }
 <p>To arrive at the above results we made several changes to the original data set. However, we can use the pipe <code>%&gt;%</code> to do all these calls sequentially, without creating an additional data set, or changing the original.</p>
 <p>Let us demonstrate how to get the same result as above with use of the pipe.</p>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">claim_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb268-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span>, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;southwest&quot;</span>, <span class="st">&quot;southeast&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb268-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;southwest&quot;</span>, <span class="st">&quot;southeast&quot;</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb268-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi_class =</span> <span class="kw">classify_bmi</span>(bmi)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb268-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(smoker, bmi_class) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb268-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_charges =</span> <span class="kw">mean</span>(charges))</a></code></pre></div>
@@ -953,7 +953,7 @@ code > span.ot { color: #007020; }
 ## 5 yes    overweight        38326.</code></pre>
 <p>To count the number of cases in each group, use <code>count()</code>.</p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">claim_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb270-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span>, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;southwest&quot;</span>, <span class="st">&quot;southeast&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb270-2" title="2"><span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;southwest&quot;</span>, <span class="st">&quot;southeast&quot;</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb270-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi_class =</span> <span class="kw">classify_bmi</span>(bmi)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb270-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(smoker, bmi_class) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb270-5" title="5"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>

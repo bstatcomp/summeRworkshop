@@ -725,7 +725,7 @@ filter(claim_data, region %in% c("southwest", "northwest"))
 ```
 
 For example, let's say we are interested in doing further analysis on
-people older than 18, who live in the south. We can construct a new tibble,
+people older than 29, who live in the south. We can construct a new tibble,
 where we filter out the unnecessary rows.
 
 ```{r}
@@ -841,7 +841,7 @@ Let us demonstrate how to get the same result as above with use of the pipe.
 
 ```{r}
 claim_df %>%
-  filter(age >= 18, region %in% c("southwest", "southeast")) %>%
+  filter(age >= 30, region %in% c("southwest", "southeast")) %>%
   mutate(bmi_class = classify_bmi(bmi)) %>%
   group_by(smoker, bmi_class) %>%
   summarise(mean_charges = mean(charges))
@@ -851,7 +851,7 @@ To count the number of cases in each group, use `count()`.
 
 ```{r}
 claim_df %>%
-  filter(age >= 18, region %in% c("southwest", "southeast")) %>%
+  filter(age >= 30, region %in% c("southwest", "southeast")) %>%
   mutate(bmi_class = classify_bmi(bmi)) %>%
   group_by(smoker, bmi_class) %>%
   count()
