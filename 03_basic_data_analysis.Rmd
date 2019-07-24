@@ -39,7 +39,7 @@ The trimmed mean (also truncated mean) involves the calculation of the mean afte
 mean(data$temperature, trim=0.05)
 ```
 
-Median represents the value that separtes the higher half of the data sample from the lower half of the data sample (50% of values in the sample are lower than the median and 50% of values in the sample are higher than the median).
+Median represents the value that separates the higher half of the data sample from the lower half of the data sample (50% of values in the sample are lower than the median and 50% of values in the sample are higher than the median).
 
 ```{r}
 # some data
