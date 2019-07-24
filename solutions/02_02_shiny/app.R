@@ -11,7 +11,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 
-data <- read.csv("../data/temperature.csv", sep=";")
+data <- read.csv("../../data/temperature.csv", sep=";")
 data_slovenia <- data %>% filter(data$country == "Slovenia")
 data_finland <- data %>% filter(data$country == "Finland")
 data_niger <- data %>% filter(data$country == "Niger")

@@ -1,0 +1,96 @@
+---
+title: "Basic data analysis"
+author: "Gregor Pirs, Jure Demsar and Erik Strumbelj"
+date: "25/7/2019"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: no
+    highlight: github
+---
+
+
+<div style="text-align:center">
+  <img src="../../bstatcomp.png" alt="drawing" width="128"/>
+</div>
+
+
+# Part 1
+Create a R Markdown report where you analyse temperatures in three countres -- Slovenia, Finland and Niger. In the first section of the report create two tables, one table shows the mean summer temperature for each country for each month separately. The second table is simlar, but insted of means it should show 95% confindence intervals.
+
+```{r, warning=FALSE, message=FALSE}
+# libraries
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+# load data
+data <- read.csv("../../data/temperature.csv", sep=";")
+
+# mean temperature
+mean_t <- data %>%
+  group_by(country, month) %>%
+  summarize(t=mean(temperature))
+
+# round to 2
+mean_t$t <- round(mean_t$t, digits=2)
+
+# create the table for mean temeprature
+mean_comparison <- mean_t %>% spread(key=country, value=t)
+mean_comparison
+
+
+# confidence interval
+ci_t <- data %>%
+  group_by(country, month) %>%
+  summarize(low=quantile(temperature, 0.025), high=quantile(temperature, 0.975))
+
+# lower and upper bounds
+ci_t$low <- round(ci_t$low, digits=2)
+ci_t$high <- round(ci_t$high, digits=2)
+
+# merge
+ci_t$ci <- paste("[", ci_t$low, ", ", ci_t$high, "]")
+
+# remove columns that are no longer needed
+ci_t <- ci_t %>%
+  select(-low, -high)
+
+# create the table for confidence interval
+ci_comparison <- ci_t %>% spread(key=country, value=ci)
+ci_comparison
+
+```
+
+
+# Part 2
+In the second section use linear modelling (`lm`) to find out if temperature is rising through the ages. Run the analysis separately for each country and report your findings. Plot the three regression lines by using the `ggplot` library. Use the results to predict the temperature in year 2100.
+
+```{r, warning=FALSE, message=FALSE}
+# filter the data
+data_slovenia <- data %>% filter (country == "Slovenia")
+data_finland <- data %>% filter (country == "Finland")
+data_niger <- data %>% filter (country == "Niger")
+
+# lms
+lm_slovenia <- lm(formula = temperature ~ year, data = data_slovenia)
+lm_finland <- lm(formula = temperature ~ year, data = data_finland)
+lm_niger <- lm(formula = temperature ~ year, data = data_niger)
+
+# x - years
+x <- 1900:2100
+
+# y - temperature
+y_slovenia <- lm_slovenia$coefficients[2] * x + lm_slovenia$coefficients[1]
+y_finland <- lm_finland$coefficients[2] * x + lm_finland$coefficients[1]
+y_niger <- lm_niger$coefficients[2] * x + lm_niger$coefficients[1]
+
+# create data frame
+reg_line <- data.frame(x=x, y=y_slovenia, country="Slovenia")
+reg_line <- rbind(reg_line, data.frame(x=x, y=y_finland, country="Finland"))
+reg_line <- rbind(reg_line, data.frame(x=x, y=y_niger, country="Niger"))
+
+# plot
+ggplot() +
+  geom_line(data=reg_line, aes(x=x, y=y, color=country), size=1)
+```

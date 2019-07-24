@@ -104,7 +104,7 @@ Do the following tasks on the original data set:
 ## Exercise 1
 Create a R Markdown report where you analyse temperatures in three countres -- Slovenia, Finland and Niger. In the first section of the report create two tables, one table shows the mean summer temperature for each country for each month separately. The second table is simlar, but insted of means it should show 95% confindence intervals.
 
-In the second section use linear modelling (`lm`) to find out if temperature is rising through the ages. Run the analysis separately for each country and report your findings. Plot the three regression lines by using the `ggplot` library.
+In the second section use linear modelling (`lm`) to find out if temperature is rising through the ages. Run the analysis separately for each country and report your findings. Plot the three regression lines by using the `ggplot` library. Use the results to predict the temperature in year 2100.
 
 
 ## Exercise 2
