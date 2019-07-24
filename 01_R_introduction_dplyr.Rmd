@@ -18,14 +18,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # R and Rstudio
-R (https://www.r-project.org/) is a free open-source software for statistical 
+R (https://www.r-project.org/) is free open-source software for statistical 
 computing.
 The basic interface to R is via console, which is quite rigid. RStudio 
 (https://www.rstudio.com) provides
 us with a better user interface and additional functionalities 
 (R notebooks, RMarkdown,...). 
 
-Usually the page in RStudio is separated into four parts.
+Usually the user interface in RStudio is split into four parts.
 Upper left part is used for scripts. These are R files (or similar) which
 include our code and represent the main building blocks of our programs.
 Lower left part is the console, equivalent to the basic console interface of
@@ -45,16 +45,6 @@ working directory to C:/Author you would call
 setwd("C:/Author")
 ```
 
-Note that R recognizes either a slash or double backslash in the path, 
-but it does not recognize a single backslash, which is the default if you
-copy the path on a Slovenian computer.
-
-```{r, eval=FALSE}
-setwd("C:/Author") # OK
-setwd("C:\\Author") # OK
-setwd("C:\Author") # Not OK.
-```
-
 # Variables
 
 Variables are the main data type of every program. In R, we define the values
@@ -70,7 +60,7 @@ x            <- 2.7
 m            <- n # m gets value 20
 my_flag      <- TRUE
 student_name <- "Luke"
-student_name <- Luke # because there is no variable Luka, it returns an error
+student_name <- Luke # because there is no variable named Luke, it returns an error
 ```
 
 By using the function `typeof()` we can check the type of a variable. 
@@ -230,9 +220,6 @@ a[a < 2 | a > 4]
 
 
 ## Factor
-
-Factors can be considered more as a variable type, than a data structure.
-But since they are based on vectors, we present them at this point.
 
 Factors are used for coding categorical variables, which can only take
 a finite number of predetermined values. We can further divide categorical
@@ -458,7 +445,7 @@ Function automatically returns a data frame. `read.csv()` assumes that
 comma is the separator and a decimal point. However, it allows the
 change of these default values by providing the corresponding arguments. It
 also assumes that we have a header by default. When saving your data in the
-CSV format, we recommend using a semi-colon as the separator, as comma is
+csv format, we recommend using a semi-colon as the separator, as comma is
 often used a) in text, b) as the decimal separator, or c) as 
 thousands separator.
 
