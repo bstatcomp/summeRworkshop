@@ -88,7 +88,7 @@ Read the `player_wage.csv` data (source: https://www.kaggle.com/aishjun/nba-sala
 Do the following tasks on the original data set:
 
 * create a tibble with only Slovenian players,
-* create a tibble with all USA players who play for Golden State Warriors (GWS),
+* create a tibble with all USA players who play for Golden State Warriors (GSW),
 * arrange Players first by age, then by salary, both descending
 * create a tibble with columns name, country, draft number, age and team,
 * add a new variable to the data frame, minutes per game (MPG),

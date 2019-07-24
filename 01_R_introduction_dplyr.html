@@ -141,6 +141,7 @@ code > span.ot { color: #007020; }
 <li><a href="#summarise">Summarise</a></li>
 <li><a href="#the-pipe">The pipe</a></li>
 </ul></li>
+<li><a href="#long-and-wide-data-formats">Long and wide data formats</a></li>
 </ul>
 </div>
 
@@ -170,9 +171,9 @@ code > span.ot { color: #007020; }
 <a class="sourceLine" id="cb3-2" title="2">x            &lt;-<span class="st"> </span><span class="fl">2.7</span></a>
 <a class="sourceLine" id="cb3-3" title="3">m            &lt;-<span class="st"> </span>n <span class="co"># m gets value 20</span></a>
 <a class="sourceLine" id="cb3-4" title="4">my_flag      &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-5" title="5">student_name &lt;-<span class="st"> &quot;Luka&quot;</span></a>
-<a class="sourceLine" id="cb3-6" title="6">student_name &lt;-<span class="st"> </span>Luka <span class="co"># because there is no variable Luka, it returns an error</span></a></code></pre></div>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;Luka&#39; not found</code></pre>
+<a class="sourceLine" id="cb3-5" title="5">student_name &lt;-<span class="st"> &quot;Luke&quot;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">student_name &lt;-<span class="st"> </span>Luke <span class="co"># because there is no variable Luka, it returns an error</span></a></code></pre></div>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;Luke&#39; not found</code></pre>
 <p>By using the function <code>typeof()</code> we can check the type of a variable.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">typeof</span>(n)</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
@@ -197,7 +198,7 @@ code > span.ot { color: #007020; }
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">my_flag</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">student_name</a></code></pre></div>
-<pre><code>## [1] &quot;Luka&quot;</code></pre>
+<pre><code>## [1] &quot;Luke&quot;</code></pre>
 <p>We can apply arithmetic operations on numerical variables.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">n <span class="op">+</span><span class="st"> </span>x</a></code></pre></div>
 <pre><code>## [1] 22.7</code></pre>
@@ -224,14 +225,14 @@ code > span.ot { color: #007020; }
 <pre><code>## [1] FALSE</code></pre>
 <p>We can concatenate strings with functions <code>paste()</code> and <code>paste0()</code>. The difference between these functions is that the first one forces a space between inputs, while the second one does not.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">paste</span>(student_name, <span class="st">&quot;is&quot;</span>, n, <span class="st">&quot;years old&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;Luka is 20 years old&quot;</code></pre>
+<pre><code>## [1] &quot;Luke is 20 years old&quot;</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">paste0</span>(student_name, <span class="st">&quot;is&quot;</span>, n, <span class="st">&quot;years old&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;Lukais20years old&quot;</code></pre>
+<pre><code>## [1] &quot;Lukeis20years old&quot;</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">L_username &lt;-<span class="st"> </span><span class="kw">paste0</span>(student_name, n)</a></code></pre></div>
 <p>Function <code>paste()</code> can get an additional parameter <code>sep</code>, which should be used between the inputs. If we want to find out more about a function, we put a question mark before the function’s name in the console.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># ?paste</span></a>
 <a class="sourceLine" id="cb52-2" title="2"><span class="kw">paste</span>(student_name, <span class="st">&quot;is&quot;</span>, n, <span class="st">&quot;years_old&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;Luka_is_20_years_old&quot;</code></pre>
+<pre><code>## [1] &quot;Luke_is_20_years_old&quot;</code></pre>
 </div>
 <div id="basic-data-structures" class="section level1">
 <h1>Basic data structures</h1>
@@ -928,7 +929,7 @@ code > span.ot { color: #007020; }
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">g_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(claim_df, smoker, bmi_class)</a>
 <a class="sourceLine" id="cb267-2" title="2"><span class="kw">summarise</span>(g_data, <span class="dt">mean_charges =</span> <span class="kw">mean</span>(charges))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
-## # Groups:   smoker [2]
+## # Groups:   smoker [?]
 ##   smoker bmi_class   mean_charges
 ##   &lt;fct&gt;  &lt;ord&gt;              &lt;dbl&gt;
 ## 1 no     normal            10454.
@@ -947,7 +948,7 @@ code > span.ot { color: #007020; }
 <a class="sourceLine" id="cb269-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(smoker, bmi_class) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb269-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_charges =</span> <span class="kw">mean</span>(charges))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
-## # Groups:   smoker [2]
+## # Groups:   smoker [?]
 ##   smoker bmi_class   mean_charges
 ##   &lt;fct&gt;  &lt;ord&gt;              &lt;dbl&gt;
 ## 1 no     normal            10454.
@@ -971,6 +972,61 @@ code > span.ot { color: #007020; }
 ## 4 yes    normal         15
 ## 5 yes    overweight     84</code></pre>
 </div>
+</div>
+<div id="long-and-wide-data-formats" class="section level1">
+<h1>Long and wide data formats</h1>
+<p>Usually we encounter data in a wide format. A wide format of data is a format where each row represents an object, some columns represent identifiers of this object, and several columns contain measurements associated with this object. On the other hand, in a long format each row represents a measurement. In other words, the columns that contain object identifiers remain unchanged, but we get a new row for each of the measured values. The long format is usually easier to process, while the wide format is easier to comprehend. Also several R functions (for example <code>ggplot</code>) require a long data format.</p>
+<p>The functions for conversion between the formats in <strong>tidyr</strong> are <code>gather</code> (wide to long) and <code>spread</code> (long to wide). Let us look how to use them on a stock market data (acquired from the R package <strong>datasets</strong>). Here we have the daily closing prices of four major European stock indices between the years 1991 and 1998. Each row represents an object – the day of the closing prices. Then we have four measurements (prices). This data frame is therefore in a wide format. Let us convert it to a long format, and then back to wide, to see how to use <code>gather</code> and <code>spread</code>.</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb273-2" title="2">stock_df &lt;-<span class="st"> </span>datasets<span class="op">::</span>EuStockMarkets</a>
+<a class="sourceLine" id="cb273-3" title="3">stock_df &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(<span class="dt">X =</span> <span class="kw">as.matrix</span>(stock_df), <span class="dt">time=</span><span class="kw">time</span>(stock_df)))</a>
+<a class="sourceLine" id="cb273-4" title="4">stock_df</a></code></pre></div>
+<pre><code>## # A tibble: 1,860 x 5
+##    X.DAX X.SMI X.CAC X.FTSE  time
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 1629. 1678. 1773.  2444. 1991.
+##  2 1614. 1688. 1750.  2460. 1992.
+##  3 1607. 1679. 1718   2448. 1992.
+##  4 1621. 1684. 1708.  2470. 1992.
+##  5 1618. 1687. 1723.  2485. 1992.
+##  6 1611. 1672. 1714.  2467. 1992.
+##  7 1631. 1683. 1734.  2488. 1992.
+##  8 1640. 1704. 1757.  2508. 1992.
+##  9 1635. 1698. 1754   2510. 1992.
+## 10 1646. 1716. 1754.  2497. 1992.
+## # ... with 1,850 more rows</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">df_long &lt;-<span class="st"> </span><span class="kw">gather</span>(stock_df, <span class="dt">key =</span> <span class="st">&quot;stock&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;price&quot;</span>, <span class="op">-</span>time)</a>
+<a class="sourceLine" id="cb275-2" title="2">df_long</a></code></pre></div>
+<pre><code>## # A tibble: 7,440 x 3
+##     time stock price
+##    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1 1991. X.DAX 1629.
+##  2 1992. X.DAX 1614.
+##  3 1992. X.DAX 1607.
+##  4 1992. X.DAX 1621.
+##  5 1992. X.DAX 1618.
+##  6 1992. X.DAX 1611.
+##  7 1992. X.DAX 1631.
+##  8 1992. X.DAX 1640.
+##  9 1992. X.DAX 1635.
+## 10 1992. X.DAX 1646.
+## # ... with 7,430 more rows</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">df_wide &lt;-<span class="st"> </span><span class="kw">spread</span>(df_long, <span class="dt">key =</span> <span class="st">&quot;stock&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;price&quot;</span>)</a>
+<a class="sourceLine" id="cb277-2" title="2">df_wide</a></code></pre></div>
+<pre><code>## # A tibble: 1,860 x 5
+##     time X.CAC X.DAX X.FTSE X.SMI
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 1991. 1773. 1629.  2444. 1678.
+##  2 1992. 1750. 1614.  2460. 1688.
+##  3 1992. 1718  1607.  2448. 1679.
+##  4 1992. 1708. 1621.  2470. 1684.
+##  5 1992. 1723. 1618.  2485. 1687.
+##  6 1992. 1714. 1611.  2467. 1672.
+##  7 1992. 1734. 1631.  2488. 1683.
+##  8 1992. 1757. 1640.  2508. 1704.
+##  9 1992. 1754  1635.  2510. 1698.
+## 10 1992. 1754. 1646.  2497. 1716.
+## # ... with 1,850 more rows</code></pre>
 </div>
     </section>
   </div>
