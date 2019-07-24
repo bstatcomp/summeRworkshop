@@ -33,8 +33,8 @@ Open the _01_data_frame_exercise.R_ script and run it. Now you should have a dat
 * Print only females.
 * Print all males taller than 180cm.
 * Create a new variable which shows the BMI of each person.
-* Print average ages across genders.
-* Transform the data frame into a long format, where height, weight and age are the measurements.
+* (only dplyr) Print average ages across genders.
+* (only tidyr) Transform the data frame into a long format, where height, weight and age are the measurements.
 
 
 ### Functions
