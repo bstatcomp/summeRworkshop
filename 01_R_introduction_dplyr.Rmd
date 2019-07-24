@@ -69,8 +69,8 @@ n            <- 20
 x            <- 2.7
 m            <- n # m gets value 20
 my_flag      <- TRUE
-student_name <- "Luka"
-student_name <- Luka # because there is no variable Luka, it returns an error
+student_name <- "Luke"
+student_name <- Luke # because there is no variable Luka, it returns an error
 ```
 
 By using the function `typeof()` we can check the type of a variable. 
@@ -868,5 +868,36 @@ claim_df %>%
   mutate(bmi_class = classify_bmi(bmi)) %>%
   group_by(smoker, bmi_class) %>%
   count()
+```
+
+
+# Long and wide data formats
+Usually we encounter data in a wide format. A wide format of data is
+a format where each row represents an object, some columns
+represent identifiers of this object, and several columns contain
+measurements associated with this object. On the other hand, in a long format 
+each row represents a measurement. In other words, the columns that
+contain object identifiers remain unchanged, but we get a new row for
+each of the measured values. The long format is usually easier to process,
+while the wide format is easier to comprehend. Also several R functions
+(for example `ggplot`) require a long data format.
+
+The functions for conversion between the formats in __tidyr__ are 
+`gather` (wide to long) and `spread` (long to wide). Let us look how to
+use them on a stock market data (acquired from the R package __datasets__).
+Here we have the daily closing prices of four major European stock indices 
+between the years 1991 and 1998. Each row represents an object -- the day
+of the closing prices. Then we have four measurements (prices). This
+data frame is therefore in a wide format. Let us convert it to a long format,
+and then back to wide, to see how to use `gather` and `spread`.
+```{r, warning = FALSE}
+library(tidyr)
+stock_df <- datasets::EuStockMarkets
+stock_df <- as_tibble(data.frame(X = as.matrix(stock_df), time=time(stock_df)))
+stock_df
+df_long <- gather(stock_df, key = "stock", value = "price", -time)
+df_long
+df_wide <- spread(df_long, key = "stock", value = "price")
+df_wide
 ```
 
