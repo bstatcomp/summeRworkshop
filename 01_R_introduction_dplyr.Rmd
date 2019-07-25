@@ -667,7 +667,7 @@ For the debugging in R we will use the `browser()` function. It stops the
 execution of the code and you can access the variables in the environment at 
 the moment that browser was called.
 
-For browser commands see ?browser or type help when browser is active.
+For browser commands see `?browser` or type help when browser is active.
 
 
 # Data wrangling with dplyr
